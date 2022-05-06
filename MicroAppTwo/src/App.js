@@ -51,7 +51,7 @@ export default function App() {
           }}>
           <Section title="App 2">
             This screen comes from{' '}
-            <Text style={styles.highlight}>MicroAppTwo</Text> container.
+            <Text style={styles.highlight}>MicroAppTwo</Text> container. (HERE)
           </Section>
         </View>
       </View>

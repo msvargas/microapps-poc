@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactNative = require('@callstack/repack');
+const {ModuleFederationPlugin} = require('webpack').container;
 
 /**
  * More documentation, installation, usage, motivation and differences with Metro is available at:
@@ -259,6 +260,7 @@ module.exports = {
       exclude: /\.chunk\.(js)?bundle$/,
       filename: '[file].map',
       append: `//# sourceMappingURL=[url]?platform=${platform}`,
+      moduleFilenameTemplate: 'webpack://host/[resource-path]?[loaders]',
       /**
        * Uncomment for faster builds but less accurate Source Maps
        */
@@ -276,6 +278,7 @@ module.exports = {
       include: /\.chunk\.(js)?bundle$/,
       filename: '[file].map',
       append: `//# sourceMappingURL=[url]?platform=${platform}`,
+      moduleFilenameTemplate: 'webpack://host/[resource-path]?[loaders]',
       /**
        * Uncomment for faster builds but less accurate Source Maps
        */
@@ -297,6 +300,22 @@ module.exports = {
          * Compilation for each platform gets it's own log file.
          */
         // file: path.join(__dirname, `${mode}.${platform}.log`),
+      },
+    }),
+
+    new ModuleFederationPlugin({
+      name: 'host',
+      shared: {
+        react: {
+          singleton: true,
+          eager: true,
+        },
+        'react-native': {
+          singleton: true,
+          eager: true,
+          requiredVersion:
+            require('./package.json').dependencies['react-native'],
+        },
       },
     }),
   ],
