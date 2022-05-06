@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const ReactNative = require('@callstack/repack');
+const {ModuleFederationPlugin} = require('webpack').container;
+
+const STANDALONE = Boolean(process.env.STANDALONE);
 
 /**
  * More documentation, installation, usage, motivation and differences with Metro is available at:
@@ -38,6 +41,7 @@ const entry = ReactNative.getEntry();
 const platform = ReactNative.getPlatform({fallback: process.env.PLATFORM});
 const minimize = ReactNative.isMinimizeEnabled({fallback: !dev});
 const devServer = ReactNative.getDevServerOptions();
+devServer.hmr = STANDALONE ? devServer.hmr : false;
 const reactNativePath = ReactNative.getReactNativePath();
 
 /**
@@ -259,6 +263,7 @@ module.exports = {
       exclude: /\.chunk\.(js)?bundle$/,
       filename: '[file].map',
       append: `//# sourceMappingURL=[url]?platform=${platform}`,
+      moduleFilenameTemplate: 'webpack://app2/[resource-path]?[loaders]',
       /**
        * Uncomment for faster builds but less accurate Source Maps
        */
@@ -276,6 +281,7 @@ module.exports = {
       include: /\.chunk\.(js)?bundle$/,
       filename: '[file].map',
       append: `//# sourceMappingURL=[url]?platform=${platform}`,
+      moduleFilenameTemplate: 'webpack://app2/[resource-path]?[loaders]',
       /**
        * Uncomment for faster builds but less accurate Source Maps
        */
@@ -297,6 +303,29 @@ module.exports = {
          * Compilation for each platform gets it's own log file.
          */
         // file: path.join(__dirname, `${mode}.${platform}.log`),
+      },
+    }),
+
+    new ModuleFederationPlugin({
+      name: 'app2',
+      filename: 'app2.container.bundle',
+      library: {
+        name: 'app2',
+        type: 'self',
+      },
+      exposes: {
+        './App.js': './src/App.js',
+      },
+      shared: {
+        react: {
+          singleton: true,
+          eager: STANDALONE, // to be figured out
+        },
+        'react-native': {
+          singleton: true,
+          eager: STANDALONE, // to be figured out
+          requiredVersion: '^0.68.1',
+        },
       },
     }),
   ],
