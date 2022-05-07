@@ -5,16 +5,20 @@
   "scripts": {
     "android": "react-native run-android --no-packager",
     "ios": "react-native run-ios --no-packager",
-    "start": "STANDALONE=1 react-native webpack-start --port 9000",
+    "start": "react-native webpack-start --port 9000",
     "bundle": "react-native webpack-bundle --platform ios --entry-file index.js --bundle-output ./dist/index.bundle --dev=false",
     "webpack": "PLATFORM=ios webpack -c webpack.config.js",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.10",
+    "@shopify/restyle": "^2.1.0",
     "react": "17.0.2",
     "react-native": "0.68.1",
-    "react-native-svg": "^12.3.0"
+    "react-native-animatable": "^1.3.3",
+    "react-native-svg": "^12.3.0",
+    "react-native-swipeable-list": "^0.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

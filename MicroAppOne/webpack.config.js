@@ -329,6 +329,38 @@ module.exports = {
         './App.js': './src/App.js',
       },
       shared: {
+        '@reduxjs/toolkit': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        'redux-persist': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        'react-redux': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        '@shopify/restyle': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        'react-native-animatable': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        'react-native-svg': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        'react-native-swipeable-list': {
+          singleton: true,
+          eager: STANDALONE,
+        },
+        '@react-navigation/native': {
+          singleton: true,
+          eager: STANDALONE,
+        },
         react: {
           singleton: true,
           eager: STANDALONE, // to be figured out
@@ -336,7 +368,6 @@ module.exports = {
         'react-native': {
           singleton: true,
           eager: STANDALONE, // to be figured out
-          requiredVersion: '^0.68.1',
         },
       },
     }),

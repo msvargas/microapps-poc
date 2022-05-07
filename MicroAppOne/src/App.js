@@ -1,89 +1,72 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
+  SafeAreaView,
+  ScrollView,
+  ActivityIndicator,
 } from 'react-native';
-import DeveloperActivitySvg from './undraw_Developer_activity_re_39tg.svg';
+import {getMails} from './mailService';
+/* import BellIcon from './ico-bell.svg';
+ */
+export default function App({leftIcon, rightIcon}) {
+  const [notifications, setNotifications] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-
-const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-export default function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    flex: 1,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  React.useEffect(() => {
+    getMails()
+      .then(data => {
+        setNotifications(data.mails);
+        console.log(data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
-    <>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={backgroundStyle}>
-        <View
+    <SafeAreaView
+      style={{
+        flex: 1,
+        /*  backgroundColor: 'lightblue',
+        borderStyle: 'dashed',
+        borderWidth: 5,
+        borderColor: 'red', */
+      }}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Text
           style={{
-            flex: 1,
-            backgroundColor: 'lightblue',
-            borderStyle: 'dashed',
-            borderWidth: 5,
-            borderColor: 'red',
+            fontWeight: 'bold',
+            fontSize: 24,
+            lineHeight: 32,
+            marginBottom: 32,
+            marginTop: 24,
+            marginHorizontal: 24,
           }}>
-          <Section title="App 1">
-            This screen comes from{' '}
-            <Text style={styles.highlight}>MicroAppOne</Text> container.
-            (CHANGE)
-          </Section>
-          <DeveloperActivitySvg width="100%" height="400" />
-        </View>
-      </View>
-    </>
+          Notifications
+        </Text>
+        {isLoading && <ActivityIndicator size="large" />}
+        {React.Children.toArray(
+          notifications.map(notification => (
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+                paddingVertical: 16,
+              }}>
+              {leftIcon}
+              <View style={{flex: 0.7}}>
+                <Text numberOfLines={3}>{notification.subject}</Text>
+                <Text style={{color: 'grey'}}>
+                  {notification.date?.substring(0, 10)}
+                </Text>
+              </View>
+              {rightIcon}
+            </View>
+          )),
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
