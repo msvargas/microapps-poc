@@ -7,6 +7,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import DeveloperActivitySvg from './undraw_Developer_activity_re_39tg.svg';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
@@ -61,6 +62,7 @@ export default function App() {
             <Text style={styles.highlight}>MicroAppOne</Text> container.
             (CHANGE)
           </Section>
+          <DeveloperActivitySvg width="100%" height="400" />
         </View>
       </View>
     </>

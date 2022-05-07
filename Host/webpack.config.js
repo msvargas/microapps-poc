@@ -183,7 +183,7 @@ module.exports = {
        */
       {
         test: ReactNative.getAssetExtensionsRegExp(
-          ReactNative.ASSET_EXTENSIONS,
+          ReactNative.ASSET_EXTENSIONS.filter(ext => ext !== 'svg'),
         ),
         use: {
           loader: '@callstack/repack/assets-loader',
@@ -198,6 +198,18 @@ module.exports = {
             scalableAssetExtensions: ReactNative.SCALABLE_ASSETS,
           },
         },
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              native: true,
+              dimensions: false,
+            },
+          },
+        ],
       },
     ],
   },
