@@ -33,6 +33,12 @@ Or as part of a Host application.
 3. Run dev server for Host application: `yarn --cwd Host start`
 4. Build Host application: `yarn --cwd Host ios`/`yarn --cwd Host android`
 
+### Running Web Host application with app containers
+
+1. Run dev server for app 1 container: `yarn --cwd MicroAppOne start`
+2. Run dev server for app 2 container: `yarn --cwd MicroAppTwo start`
+3. Run dev server for Host application: `yarn --cwd WebHost start`
+
 ### Notes
 
 It might be helpful to open Re.Pack's web dashboard to analyse artifacts:
@@ -40,3 +46,8 @@ It might be helpful to open Re.Pack's web dashboard to analyse artifacts:
 - http://localhost:9000/dashboard for MicroAppOne container
 - http://localhost:9001/dashboard for MicroAppTwo container
 - http://localhost:8081/dashboard for Host container
+
+# React Native Web Support
+
+https://stackblitz.com/edit/github-l3cwda-lqkjpy?file=app1%2Fsrc%2FApp.js
+https://github.com/necolas/react-native-web/issues/2273

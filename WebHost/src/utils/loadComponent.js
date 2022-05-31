@@ -2,8 +2,7 @@ import { getOrLoadRemote } from "./getOrLoadRemote";
 
 window.__repack__ = {
   loadChunkCallback: [],
-  loadChunk: async (...args) => {
-    const [url, cb, chunkName, chunkId, parentChunkId] = args;
+  loadChunk: async (url, cb, chunkName, chunkId, parentChunkId) => {
     if (chunkName !== undefined && chunkId !== undefined) {
       // Load webpack chunk
       try {
@@ -15,7 +14,9 @@ window.__repack__ = {
       } catch (error) {
         cb(error);
       }
-    } /* else {
+    } /*
+    TODO: check if this is needed
+    else {
       // Load HMR update
       if (__DEV__ && module.hot) {
         const update = await fetch(url);

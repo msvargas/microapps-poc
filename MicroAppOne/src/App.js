@@ -13,7 +13,9 @@ const App = () => {
           y: pan.y._value,
         });
       },
-      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}]),
+      onPanResponderMove: Animated.event([null, {dx: pan.x, dy: pan.y}], {
+        useNativeDriver: false,
+      }),
       onPanResponderRelease: () => {
         pan.flattenOffset();
       },
@@ -23,6 +25,7 @@ const App = () => {
   return (
     <>
       <View style={styles.container}>
+        <Text style={styles.titleText}>MicroApp One Multiplatform</Text>
         <Text style={styles.titleText}>Drag this box!</Text>
         <Animated.View
           style={{
