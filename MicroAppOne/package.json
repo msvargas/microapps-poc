@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android --no-packager",
     "ios": "react-native run-ios --no-packager",
-    "start": "STANDALONE=1 react-native webpack-start --port 9000",
+    "start": "react-native webpack-start --port 9000",
     "bundle": "react-native webpack-bundle --platform ios --entry-file index.js --bundle-output ./dist/index.bundle --dev=false",
     "webpack": "PLATFORM=ios webpack -c webpack.config.js",
     "test": "jest",
