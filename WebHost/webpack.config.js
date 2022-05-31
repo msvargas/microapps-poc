@@ -1,7 +1,7 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin =
   require("webpack").container.ModuleFederationPlugin;
-
 const path = require("path");
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "dist"),
     },
-    port: 3001,
+    port: 3000,
   },
   output: {
     publicPath: "auto",
@@ -41,21 +41,18 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: process.env.NODE_ENV === "development",
+    }),
     new ModuleFederationPlugin({
       name: "web-host",
       shared: {
         react: { singleton: true },
-        "react-dom": { singleton: true, requiredVersion: "^17.0.2" },
-        "react-native-web": {
-          singleton: true,
-        },
+        "react-dom": { singleton: true },
+        "react-native-web": { singleton: true },
         "react-native": {
-          import: "react-native-web",
-          //shareKey: "shared-rn-web", // under this name the shared module will be placed in the share scope
-          //shareScope: "default", // share scope with this name will be used
-          singleton: true, // only a single version of the shared module is allowed
-          //strictVersion: true, // don't use shared version when version isn't valid. Singleton or modules without fallback will throw, otherwise fallback is used
-          //version: "0.68.1", // the version of the shared module
+          singleton: true,
+          requiredVersion: "^0.68.1",
         },
       },
     }),

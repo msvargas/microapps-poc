@@ -1,6 +1,5 @@
-import React, {useRef, Suspense} from 'react';
+import React, {useRef} from 'react';
 import {Animated, View, StyleSheet, PanResponder, Text} from 'react-native';
-const RemoteApp = React.lazy(() => import('app2/App'));
 
 const App = () => {
   const pan = useRef(new Animated.ValueXY()).current;
@@ -34,11 +33,6 @@ const App = () => {
             <Text style={{color: '#fff'}}>App1</Text>
           </View>
         </Animated.View>
-      </View>
-      <View style={styles.container}>
-        <Suspense fallback={'loading...'}>
-          <RemoteApp />
-        </Suspense>
       </View>
     </>
   );

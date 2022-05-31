@@ -342,14 +342,9 @@ module.exports = {
           eager: STANDALONE, // to be figured out
         },
         'react-native': {
-          import: 'react-native-web',
           requiredVersion: '^0.68.1',
           eager: STANDALONE, // to be figured out
-          shareKey: 'shared-vue', // under this name the shared module will be placed in the share scope
-          shareScope: 'default', // share scope with this name will be used
           singleton: true, // only a single version of the shared module is allowed
-          strictVersion: true, // don't use shared version when version isn't valid. Singleton or modules without fallback will throw, otherwise fallback is used
-          version: '1.0.0', // the version of the shared module
         },
       },
     }),
