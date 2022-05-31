@@ -333,10 +333,18 @@ module.exports = {
           singleton: true,
           eager: STANDALONE, // to be figured out
         },
-        'react-native': {
+        'react-dom': {
           singleton: true,
           eager: STANDALONE, // to be figured out
+        },
+        'react-native-web': {
+          singleton: true,
+          eager: STANDALONE, // to be figured out
+        },
+        'react-native': {
           requiredVersion: '^0.68.1',
+          eager: STANDALONE, // to be figured out
+          singleton: true, // only a single version of the shared module is allowed
         },
       },
     }),
