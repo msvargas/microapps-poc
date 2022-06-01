@@ -12,7 +12,7 @@ yarn --cwd MicroAppOne && yarn --cwd MicroAppTwo && yarn --cwd Host
 
 App can be run as a standalone application using:
 
-1. `yarn --cwd MicroAppOne start` (notice the dev server is running on port 9000)
+1. `STANDALONE=1 yarn --cwd MicroAppOne start` (notice the dev server is running on port 9000)
 2. `yarn --cwd MicroAppOne ios`/`yarn --cwd MicroAppOne android`
 
 Or as part of a Host application.
@@ -21,7 +21,7 @@ Or as part of a Host application.
 
 App can be run as a standalone application using:
 
-1. `yarn --cwd MicroAppTwo start` (notice the dev server is running on port 9001)
+1. `STANDALONE=1 yarn --cwd MicroAppTwo start` (notice the dev server is running on port 9001)
 2. `yarn --cwd MicroAppTwo ios`/`yarn --cwd MicroAppTwo android`
 
 Or as part of a Host application.
