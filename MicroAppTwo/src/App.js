@@ -1,10 +1,8 @@
 import React from 'react';
 import {StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import SpecificPlatform from './SpecificPlatform';
 
 const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -34,7 +32,7 @@ export default function App() {
 
   const backgroundStyle = {
     flex: 1,
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: 'white',
   };
 
   return (
@@ -53,6 +51,7 @@ export default function App() {
             This screen comes from{' '}
             <Text style={styles.highlight}>MicroAppTwo</Text> container. (HERE)
           </Section>
+          <SpecificPlatform />
         </View>
       </View>
     </>

@@ -7,11 +7,12 @@ window.__repack__ = {
       // Load webpack chunk
       try {
         await getOrLoadRemote(
-          chunkId.toString(),
-          parentChunkId?.toString(),
+          parentChunkId.toString() + "@" + chunkId.toString(),
+          "default",
           url
         );
       } catch (error) {
+        console.error(error);
         cb(error);
       }
     } /*
