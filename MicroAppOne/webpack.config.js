@@ -346,6 +346,10 @@ module.exports = {
           singleton: true,
           eager: STANDALONE, // to be figured out
         },
+        'react-native-svg': {
+          singleton: true,
+          eager: STANDALONE, // to be figured out
+        },
       },
     }),
   ],
