@@ -47,11 +47,11 @@ It might be helpful to open Re.Pack's web dashboard to analyse artifacts:
 - http://localhost:9001/dashboard for MicroAppTwo container
 - http://localhost:8081/dashboard for Host container
 
-#NOTE: 
+## NOTE: 
 
 For Android, you should to change localhost to 10.0.2.2
 
-https://github.com/callstack/repack/issues/174#issuecomment-1194724554
+https://github.com/msvargas/microapps-poc/issues/2
 
 # React Native Web Support
 
